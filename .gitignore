@@ -1,2 +1,5 @@
+# VSCode settings
 .vscode/*
+
+# Compiled files
 *.exe
