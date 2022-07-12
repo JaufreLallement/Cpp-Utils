@@ -101,7 +101,7 @@ bool between(float num, float inter[2], bool inc = false)
  */
 float *cartesXY(float r, float a, float offset[2])
 {
-  float rad = angRad(a);
+  const float rad = angRad(a);
   return new float[2]{r * cos(rad) + offset[0], r * sin(rad) + offset[1]};
 }
 
