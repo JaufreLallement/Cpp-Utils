@@ -2,4 +2,4 @@
 .vscode/*
 
 # Compiled files
-*.exe
+output/*

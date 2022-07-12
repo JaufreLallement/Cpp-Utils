@@ -1,8 +1,9 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
-#include <array>
 using namespace std;
+
+const double PI = 3.14159265358979323;
 
 /**
  * @brief Returns the round version of a given number based on a round value
@@ -48,7 +49,7 @@ float appPercent(float total, unsigned int percent)
  */
 unsigned int circ(float r)
 {
-  return 2 * M_PI * r;
+  return 2 * PI * r;
 }
 
 /**
@@ -59,7 +60,7 @@ unsigned int circ(float r)
  */
 float angRad(float a)
 {
-  return a * (M_PI / 180);
+  return a * (PI / 180);
 }
 
 /**
@@ -98,9 +99,10 @@ bool between(float num, float inter[2], bool inc = false)
  * @param offset            : offset coordinates
  * @return array<float, 2>  : coordinates
  */
-array<float, 2> cartesXY(float r, float a, float offset[2])
+float *cartesXY(float r, float a, float offset[2])
 {
-  return {r * cos(angRad(a)) + offset[0], r * sin(angRad(a)) + offset[1]};
+  float rad = angRad(a);
+  return new float[2]{r * cos(rad) + offset[0], r * sin(rad) + offset[1]};
 }
 
 /**
@@ -117,7 +119,7 @@ float arctan(float origin[2], float target[2])
   const float dx = ox - tx, dy = oy - ty;
 
   float theta = atan2(-dx, -dy);
-  theta *= 180 / M_PI;
+  theta *= 180 / PI;
 
   if (theta < 0)
     theta += 360;
@@ -131,4 +133,9 @@ int main()
   cout << percent(84, 0) << "%" << endl;
   cout << appPercent(18432, 50) << endl;
   cout << circ(20) << endl;
+  cout << angRad(90) << endl;
+
+  float offs[2] = {50, 50};
+  float *myCartesianCoords = cartesXY(20, 90, offs);
+  cout << "X=" << myCartesianCoords[0] << ", Y=" << myCartesianCoords[1] << endl;
 }
